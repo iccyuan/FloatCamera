@@ -1,0 +1,5 @@
+<tile-service xmlns:android="http://schemas.android.com/apk/res/android"
+              android:label="@string/service_label"
+              android:icon="@drawable/icon_camera"
+              android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+        />

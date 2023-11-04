@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">透明照相机</string>
+    <string name="switch_camera">开关</string>
+    <string name="service_label">透明照相机</string>
+    <string name="notification_title">透明照相机正在运行</string>
+    <string name="notification_message">点击进入</string>
+    <string name="channel_name">Service Notifications</string>
+    <string name="channel_description">Notifications for Floating Camera Service</string>
+</resources>
