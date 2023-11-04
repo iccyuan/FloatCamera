@@ -47,8 +47,10 @@ class FloatingCameraService : Service() {
         cameraManager = getSystemService(CAMERA_SERVICE) as CameraManager
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             setupFloatingWindow()
-            initializeCamera()
+            startForegroundService()
         } else {
+            // If permission is not granted, update the shared preferences
+            PreferencesUtil.setServiceActive(applicationContext, false)
             stopSelf()
         }
     }
@@ -166,7 +168,13 @@ class FloatingCameraService : Service() {
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         val opacity = intent.getIntExtra("OPACITY", 100)
         adjustOpacity(opacity)
-        startForegroundService()
+        try {
+            initializeCamera()
+        } catch (e: CameraAccessException) {
+            e.printStackTrace()
+            // Also update the service active status
+            PreferencesUtil.setServiceActive(applicationContext, false)
+        }
         return START_STICKY
     }
 

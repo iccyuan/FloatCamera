@@ -13,7 +13,9 @@ class QuickSettingsTileService : TileService() {
     override fun onStartListening() {
         super.onStartListening()
         val tile = qsTile
-        tile.state = if (isMyServiceRunning(FloatingCameraService::class.java)) Tile.STATE_ACTIVE else Tile.STATE_INACTIVE
+        // Check if the service is active or if the camera has been disabled
+        val isServiceActive = PreferencesUtil.isServiceActive(applicationContext)
+        tile.state = if (isServiceActive) Tile.STATE_ACTIVE else Tile.STATE_INACTIVE
         tile.updateTile()
     }
 
